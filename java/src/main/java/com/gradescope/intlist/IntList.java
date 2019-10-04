@@ -25,6 +25,13 @@ public class IntList extends AbstractIntList{
      */
     public static AbstractIntList createList(int... a){
         // TODO: Fill me in!
+	IntList head = new IntList(a[0]);
+        IntList prev = head;
+        for(int i=1; i < a.length; i++){
+            prev.next = new IntList(a[i]);
+            prev = (IntList) prev.next;
+        }
+        return head;
     }
 
     /**
@@ -32,6 +39,12 @@ public class IntList extends AbstractIntList{
      */
     public AbstractIntList append(int value){
         // TODO: Fill me in!
+	if(this.next == null){
+            this.next = new IntList(value);
+            return this.next;
+        }else{
+            return this.next.append(value);
+        }
     }
 
     /**
@@ -39,6 +52,13 @@ public class IntList extends AbstractIntList{
      */
     public boolean contains(int value){
         // TODO: Fill me in!
+	if(this.head == value){
+            return true;
+        }else if(this.next != null){
+            return this.next.contains(value);
+        }else{
+            return false;
+        }
     }
 
     /**
@@ -49,5 +69,11 @@ public class IntList extends AbstractIntList{
      */
     public String toString(){
         // TODO: FIll me in!
+	if(this.next != null){
+            return this.head + " " + this.next.toString();
+        }else{
+            return this.head + "\n";
+        }
     }
+
 }
